@@ -1,0 +1,22 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# SQLite databases (local testing)
+*.db
+*.sqlite3
+
+# Temporary files or scripts (optional, if you don't want to push our scratch scripts)
+scratch_migrate.py
+drop_table.py
+view_users.py
