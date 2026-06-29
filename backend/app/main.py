@@ -51,8 +51,11 @@ oauth.register(
 
 @app.get("/api/auth/login")
 async def login(request:Request):
-    redirect_uri = request.url_for('auth_callback')
-    return await oauth.google.authorize_redirect(request,redirect_uri)
+    redirect_uri = str(request.url_for('auth_callback'))
+    # Ensure HTTPS is used when deployed behind a proxy like Render
+    if request.headers.get("x-forwarded-proto") == "https" or "onrender.com" in redirect_uri:
+        redirect_uri = redirect_uri.replace("http://", "https://", 1)
+    return await oauth.google.authorize_redirect(request, redirect_uri)
 
 @app.get("/auth/google/callback")
 async def auth_callback(request:Request, db: Session = Depends(database.get_db)):
