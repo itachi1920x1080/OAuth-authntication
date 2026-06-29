@@ -29,6 +29,8 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+
 const email = ref('')
 const password = ref('')
 const errorMessage = ref('')
@@ -36,7 +38,7 @@ const router = useRouter()
 
 const handleRegister = async () => {
   try {
-    const response = await fetch('http://localhost:8000/api/auth/register', {
+    const response = await fetch(`${apiUrl}/api/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

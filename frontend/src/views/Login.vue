@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <a href="http://localhost:8000/api/auth/login" 
+      <a :href="`${apiUrl}/api/auth/login`" 
          class="block w-full text-center bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded transition duration-200">
         Google
       </a>
@@ -43,6 +43,8 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+
 const email = ref('')
 const password = ref('')
 const errorMessage = ref('')
@@ -50,7 +52,7 @@ const router = useRouter()
 
 const handleLogin = async () => {
   try {
-    const response = await fetch('http://localhost:8000/api/auth/login/local', {
+    const response = await fetch(`${apiUrl}/api/auth/login/local`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
